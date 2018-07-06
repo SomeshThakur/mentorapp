@@ -1,0 +1,46 @@
+<html>
+<head>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<style>
+    tr:hover {
+  background-color: #ffa;
+}
+
+</style>
+<body>
+<script type="text/javascript">
+    function showtotal()
+    {
+    var x = document.getElementById("total");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        document.getElementById("show").style.display="none";
+
+    }
+    }
+
+</script>
+{% if student %}
+<table class="table" align="center" border="2px">
+    <th align="center">Student Name</th>
+    <th align="center">Student Email</th>
+    <th align="center">College</th>
+
+    <tr align="center">
+        <td>{{student.name}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.college.acronym}}</td>
+        <td id="total" style="display:none">{{student.mocktest.totals}}</td>
+        <td id="show">
+            <input type="button"  onclick="showtotal()" value="Show Total"/>
+            </td>
+
+    </tr>
+</table>
+{% else %}
+<h3 align="center" style="color:red">Student Not Found</h3>
+{% endif %}
+</body>
+</html>

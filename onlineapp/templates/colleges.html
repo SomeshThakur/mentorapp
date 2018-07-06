@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% block content %}
+{% if colleges_list %}
+{%if 'onlineapp.add_college' in user_permissions%}
+<a href="{% url 'add_college' %}">
+    <button type="button" class="btn btn-info">Add Colleges</button>
+</a>
+{%endif%}
+<br/>
+<br/>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>College Name</th>
+        <th>Acronym</th>
+        {%if 'onlineapp.change_college' in user_permissions and 'onlineapp.delete_college' in user_permissions%}
+        <th>Actions</th>
+        {%endif%}
+    </tr>
+    </thead>
+
+    {% for college in colleges_list %}
+    <tr>
+        <td><a href="{% url 'college_details' college.acronym %}">{{ college.name }}</a></td>
+        <td><a href="{% url 'college_details' college.acronym %}">{{ college.acronym }}</a></td>
+        {%if 'onlineapp.change_college' in user_permissions and 'onlineapp.delete_college' in user_permissions%}
+        <td align="center">
+            <a href="{% url 'edit_college' college.id %}">
+                <button type="button" class="btn btn-primary">Edit</button>
+            </a>
+            <a href="{% url 'delete_college' college.id %}">
+                <button type="button" class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+        {%endif%}
+
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No bro College not found.</p>
+{% endif %}
+{% endblock %}

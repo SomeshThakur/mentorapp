@@ -1,0 +1,44 @@
+# Create your views here.
+
+from django.http import HttpResponse
+from django.template import loader
+
+from onlineapp.models import *
+
+
+def get(request):
+    # with open('C:\\Users\\Somesh Thakur\\Desktop\\MRND Apps Track\\onlineproject\\onlineapp\\colleges.html','r') as f:
+    #     html = f.read()
+    #
+    f = open('colleges.html', 'r')
+    return HttpResponse(f)
+
+
+def get_colleges(request):
+    clgs = College.objects.values('name', 'acronym')
+    template = loader.get_template('colleges.html')
+    context = dict()
+    context['colleges_list'] = clgs
+    return HttpResponse(template.render(context, request))
+
+
+
+
+def get_college_students(request, acronym):
+    students = College.objects.filter(acronym=acronym).values('student__name', 'student__mocktest__totals').order_by(
+        '-student__mocktest__totals')
+    template = loader.get_template('students_result.html')
+    context = dict()
+    context['students_list'] = students
+    return HttpResponse(template.render(context, request))
+
+
+def test_session_incr(request):
+    request.session.setdefault('counter', 0)
+    request.session['counter'] += 1
+    # del request.session['counter']
+    return HttpResponse("Hello %d" % request.session['counter'])
+
+
+def test_server(request):
+    raise ValueError

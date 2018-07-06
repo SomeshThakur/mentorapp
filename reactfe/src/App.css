@@ -1,0 +1,14 @@
+
+.navbar-brand{
+  color: azure;
+}
+#logout_btn{
+  float: right;
+  margin: 8px;
+}
+.collegeName{
+  color: rebeccapurple
+}
+*{
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+}

@@ -1,0 +1,14 @@
+{% load render_bundle from webpack_loader %}
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>React App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<div id="root">
+</div>
+{% render_bundle 'main' %}
+</body>
+</html>

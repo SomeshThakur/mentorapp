@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+{% block content %}
+<button type="button" class="btn btn-danger" onclick="window.history.back()">Back</button>
+<form method="post">
+    {% csrf_token %}
+    {{student.as_p}}
+    {{mock.as_p}}
+    <center>
+        <button type="submit" class="btn btn-primary"> Submit</button>
+    </center>
+</form>
+{%endblock%}

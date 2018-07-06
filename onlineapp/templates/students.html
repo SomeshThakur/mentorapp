@@ -1,0 +1,18 @@
+<body>
+{% if colleges_list %}
+<table align="center">
+    <th align="center">Student Name:</th>
+    <th align="center">Student Email:</th>
+    <th align="center">College :</th>
+    {% for college in colleges_list %}
+    <tr align="center">
+        <td>{{ college.student__name }}</td>
+        <td>{{ college.student__email }}</td>
+        <td>{{ college.acronym }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No Student Founds.</p>
+{% endif %}
+</body>

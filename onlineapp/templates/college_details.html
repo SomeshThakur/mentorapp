@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<button type="button" class="btn btn-danger" style="float:right" onclick="window.history.back()">Back</button>
+{%if 'onlineapp.add_student' in user_permissions%}
+<a href="./addstudent">
+    <button type="button" class="btn btn-info" style="float:left">Add Student</button>
+</a>
+{%endif%}
+<br/><br/>
+{% if students_list %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Mocktest Total</th>
+        {%if 'onlineapp.change_student' in user_permissions and 'onlineapp.delete_student' in user_permissions%}
+        <th>Actions</th>
+        {%endif%}
+    </tr>
+    </thead>
+    {% for student in students_list %}
+    <tr>
+        <td>{{student.student__id}}</td>
+        <td>{{ student.student__name }}</td>
+        <td>{{ student.student__mocktest__totals }}</td>
+        {%if 'onlineapp.change_student' in user_permissions and 'onlineapp.delete_student' in user_permissions%}
+        <td align="center">
+            <a href="{% url 'edit_student' student.student__college__acronym student.student__id %}">
+                <button type="button" class="btn btn-primary"> Edit</button>
+            </a>
+            <a href="{% url 'delete_student' student.student__college__acronym student.student__id %}">
+                <button type="button" class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+        {%endif%}
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No bro No Student found.</p>
+{% endif %}
+{% endblock %}
